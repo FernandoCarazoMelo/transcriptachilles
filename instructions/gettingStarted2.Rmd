@@ -1,0 +1,133 @@
+---
+title: "Untitled"
+author: "Fernando Carazo"
+date: "5 de febrero de 2018"
+output:
+  html_document:
+  css: style.css
+---
+
+<p style="text-align:center;"><img src="1.Title_2.png" alt="Welcome" style="width: 50%"/></p>
+
+<center>
+
+#### *"A large-scale platform to predict cancer targets and transcript biomarkers"*
+</center>
+
+
+<br>
+
+
+## Welcome!
+
+#### We present TranscriptAchilles, the first large-scale tool to predict transcript biomarkers associated with gene inhibition sensitivity. 
+#### This application integrates **412 loss-of-function RNA interference screens** of over 17,000 genes together with their corresponding **whole-transcriptome** RNA-seq expression profiling of the [Cancer Cell Line Encyclopedia](https://portals.broadinstitute.org/ccle). 
+<br>
+
+#### TranscriptAchilles has been developed to achieve the following analysis:
+
+#### **1. Find novel target genes for a cohort of cell lines**
+
+#### **2. Predict putative companions biomarkers for essential genes** (biomarkers can be either transcript or gene expression)
+
+<br>
+
+#### TranscriptAchilles has been developed using the [Docker](https://www.docker.com/) container framework that guarantees computational reproducibility and facilitates collaborative research. 
+#### The databases and source code are available at [GitLab](https://gitlab.com/fcarazo.m/transcriptAchilles.git/)
+
+
+<center>
+<br>
+#### **The data is already loaded in the app and ready for analysis! :)**
+<br>
+</center>
+
+
+
+## Quick start
+
+#### TranscriptAchilles outputs a ranking of putative drug target genes and their companion biomarkers for a given cohort of cell lines. 
+
+#### The functionalities of TranscriptAchilles are presented in a set of panels:
+<br>
+
+
+#### **1. Select Cell Lines.** The user can select the cohort of cell lines to be analyzed. Several primary sites and subtypes can be selected at the same time. The application is pre-loaded with all the necessary data, so that the user does not need to upload any file.
+
+#### **2. Find Essential Genes.** TranscriptAchilles identifies putative drug targets for the selected cell lines.
+
+#### **3. Predict Biomarkers for a Target Gene.** The user can select one or more genes from the previous step and predict putative biomarkers of their essentiality.
+#### The statistical model estimates the local false discovery rate (lfdr) for both genes and transcripts and decides whether genes or transcripts are the best markers for each case. The user can also find biomarkers for all the essential genes identified in *step 2* in the tab *Predict Genome-Wide Biomarkers*.
+<br>
+
+#### For any help, go to the *help* tab
+
+<br>
+
+<center>
+<br>
+#### **Lets start!!**
+<br>
+</center>
+
+<p style="text-align:center;"><img src="Overview_complete_2.png" alt="Welcome" style="width: 80%"/></p>
+
+
+<br>
+
+
+## Running TranscriptAchilles locally
+
+#### TranscriptAchilles can also be run locally. The databases and source code are available at [GitLab](https://gitlab.com/fcarazo.m/transcriptAchilles.git/). 
+
+#### Once the git repository is cloned, TranscriptAchilles’ dependencies can be installed with the following lines of code (also included in the repository):
+
+<br>
+
+```{r eval=F, echo=T}
+# CRAN's packages
+
+install.packages(c('shiny', 'shinyjs', 'shinythemes', 'ggplot2', 'scales', 'dply', 'rMatrix', 'matrixStats', 'tidyr', 'readr', 'psych', 'pheatmap', 'RColorBrewer', 'progress', 'grid', 'shinycssloaders', 'rmarkdown', 'DT', 'ROCR', 'plotROC'), repos='https://cloud.r-project.org/')
+
+# Bioconductor's packages
+source('https://bioconductor.org/biocLite.R');biocLite(); biocLite(pkgs=c('impute', 'limma', 'STRINGdb', 'qvalue'))
+
+```
+
+#### Then, the shiny app can be run locally simply by typing:
+
+
+```{r eval=F, echo=T}
+
+shiny::runApp('./transcriptachilles')
+
+```
+
+
+<br>
+
+## Data integration and workflow
+
+
+#### The Cancer Cell Line Encyclopedia (CCLE) provides public access to genomic data of up to **900 cancer cell lines**. 
+#### The transcriptome profiles of these samples were calculated in a previous study from raw RNA sequencing data using Kallisto employing Gencode 24 transcriptome (GRCh 38) as the reference annotation. 
+#### This version of the transcriptome contains **199.169 transcripts**. 
+
+
+
+#### Project Achilles includes RNAi loss-of-function screens of over **17,000 genes** in around 500 cancer cell lines.  **412 of these cell lines** match CCLE’s cell line cohort.
+
+#### More details of materials and methods can be found in the main manuscript.
+
+<br>
+
+<p style="text-align:center;"><img src="3.workflow.png" alt="workflow" style="width: 70%"/></p>
+
+
+<br>
+<br>
+### **NOTE**
+
+#### TranscriptAchilles uses the DEMETER score as the essentiality score. The more negative the DEMETER score is, the more essential the gene is for a cell line. 
+#### Authors of DEMETER stablished a cut-off of -2 as a threshold of essentiality. Genes with DEMETER scores lower than this threshold can be considered essential for a cell line.
+

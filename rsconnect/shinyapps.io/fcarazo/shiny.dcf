@@ -1,0 +1,13 @@
+name: shiny
+title: shiny
+username:
+account: fcarazo
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 272936
+bundleId: 1208039
+url: https://fcarazo.shinyapps.io/shiny/
+when: 1517830787.24084
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: dataShiny/DataForShiny.RData
